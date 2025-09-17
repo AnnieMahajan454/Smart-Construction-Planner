@@ -25,8 +25,18 @@ An AI‑assisted toolkit for data‑driven site design. It fuses pedestrian flow
 - `smart_planner/realtime.py`: Async data streams for traffic/weather
 - `smart_planner/pipeline.py`: End-to-end workflow orchestration
 
+## 🚀 Live Demo
+
+**Try the application online:** [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://smart-construction-planner.streamlit.app)
+
+*Note: The live demo works without API keys. For full AI chatbot functionality, set up your own deployment with OpenAI API key.*
+
 ## Quick Start
 
+### Option 1: Use Online (Recommended)
+Visit the live demo link above to try all features immediately.
+
+### Option 2: Run Locally
 1. Install dependencies:
    ```bash
    pip install -r requirements.txt
@@ -44,6 +54,14 @@ An AI‑assisted toolkit for data‑driven site design. It fuses pedestrian flow
    features = build_training_table("ped_counts.csv")
    model, metrics = train_models(features)
    ```
+
+### Option 3: Deploy Your Own
+1. Fork this repository
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect your GitHub repository
+4. Set main file to `costestimator.py`
+5. Add environment variables for API keys (optional)
+6. Deploy!
 
 ## Requirements
 - Python 3.8+
