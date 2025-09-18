@@ -35,5 +35,3 @@ def build_training_table(
 def train_models(features: pd.DataFrame):
     trained, metrics = mdl.train_demand_predictor(features)
     return trained, metrics
-
-

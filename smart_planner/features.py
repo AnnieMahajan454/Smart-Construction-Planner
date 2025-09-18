@@ -58,5 +58,3 @@ def build_feature_table(
     )
     base = base.dropna(subset=["target_demand_next_hour"]).reset_index(drop=True)
     return base
-
-

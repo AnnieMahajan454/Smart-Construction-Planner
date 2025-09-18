@@ -19,5 +19,3 @@ __all__ = [
     "sustainability",
     "risk_assessment",
 ]
-
-

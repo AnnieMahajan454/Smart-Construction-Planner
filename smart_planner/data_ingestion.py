@@ -61,5 +61,3 @@ def fetch_gtfs_static(gtfs_zip_url: str, dest_dir: str) -> str:
                 if chunk:
                     f.write(chunk)
     return zip_path
-
-

@@ -28,7 +28,7 @@ def test_sustainability_assessment():
     """Test basic sustainability assessment functionality."""
     try:
         from smart_planner.sustainability import assess_project_sustainability
-        
+
         # Test with basic parameters
         result = assess_project_sustainability(
             project_type="Residential",
@@ -36,13 +36,13 @@ def test_sustainability_assessment():
             location="New York",
             materials=["steel", "concrete", "wood"]
         )
-        
+
         assert result is not None
         assert hasattr(result, 'overall_score')
         assert hasattr(result, 'carbon_footprint')
         assert hasattr(result, 'leed_potential')
         assert 0 <= result.overall_score <= 100
-        
+
     except ImportError:
         pytest.skip("Sustainability module not available")
 
@@ -51,7 +51,7 @@ def test_risk_assessment():
     """Test basic risk assessment functionality."""
     try:
         from smart_planner.risk_assessment import assess_project_risks
-        
+
         # Test with basic parameters
         result = assess_project_risks(
             project_type="Commercial",
@@ -59,14 +59,14 @@ def test_risk_assessment():
             location="San Francisco",
             materials=["steel", "concrete", "glass"]
         )
-        
+
         assert result is not None
         assert hasattr(result, 'overall_risk_score')
         assert hasattr(result, 'risk_factors')
         assert hasattr(result, 'recommendations')
         assert 0 <= result.overall_risk_score <= 10
         assert len(result.risk_factors) > 0
-        
+
     except ImportError:
         pytest.skip("Risk assessment module not available")
 
@@ -76,7 +76,7 @@ def test_enhanced_features_integration():
     try:
         from smart_planner.sustainability import assess_project_sustainability
         from smart_planner.risk_assessment import assess_project_risks
-        
+
         # Common project parameters
         project_params = {
             "project_type": "Industrial",

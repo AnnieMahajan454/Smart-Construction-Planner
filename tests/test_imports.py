@@ -20,5 +20,3 @@ def test_geospatial_optional():
     pytest.importorskip("geopandas")
     pytest.importorskip("osmnx")
     assert importlib.import_module("smart_planner.geospatial")
-
-

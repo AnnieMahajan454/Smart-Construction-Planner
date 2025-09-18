@@ -46,4 +46,3 @@ async def weather_stream(
             }
             yield pd.DataFrame([row])
             await asyncio.sleep(interval_s)
-

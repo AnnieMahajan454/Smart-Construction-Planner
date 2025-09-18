@@ -41,5 +41,3 @@ def predict_demand(trained: TrainedModel, X: pd.DataFrame) -> np.ndarray:
     """Run inference using the trained model, aligning feature columns."""
     X = X.reindex(columns=list(trained.feature_names), fill_value=0)
     return trained.estimator.predict(X)
-
-
