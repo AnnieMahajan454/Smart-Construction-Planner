@@ -256,21 +256,21 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("""
     **1️⃣ Cost Estimation**
-    
+
     Start with our AI-powered cost estimation tool to get accurate project costs for any Indian city.
     """)
 
 with col2:
     st.markdown("""
     **2️⃣ Analyze Risks**
-    
+
     Assess potential risks including weather, seismic, and regulatory factors specific to your location.
     """)
 
 with col3:
     st.markdown("""
     **3️⃣ Optimize Sustainability**
-    
+
     Evaluate and improve your project's environmental impact and sustainability score.
     """)
 
@@ -300,16 +300,16 @@ with st.expander("🔧 Technical Specifications"):
     - Scikit-learn pipeline for data processing
     - Feature engineering with temporal components
     - Risk assessment algorithms
-    
+
     **Supported Cities:**
     Mumbai, Delhi, Bangalore, Hyderabad, Chennai, Kolkata, Pune, Ahmedabad
-    
+
     **Data Sources:**
     - Indian construction market data
     - Weather patterns and seasonal risks
     - Seismic zone classifications
     - Regional regulatory complexity
-    
+
     **Technologies:**
     - Streamlit for web interface
     - Plotly for interactive visualizations
