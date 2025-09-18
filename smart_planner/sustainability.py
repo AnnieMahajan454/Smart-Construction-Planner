@@ -235,11 +235,11 @@ def predict_leed_potential(sustainability_metrics: Dict[str, float]) -> str:
 
     # LEED scoring thresholds (simplified)
     total_score = (
-        sustainability_metrics.get('energy_efficiency', 0) * 0.3 +
-        sustainability_metrics.get('water_usage', 0) * 0.2 +
-        sustainability_metrics.get('green_materials', 0) * 0.2 +
-        sustainability_metrics.get('waste_reduction', 0) * 0.15 +
-        (100 - min(100, sustainability_metrics.get('carbon_footprint', 50000) / 500)) * 0.15
+        sustainability_metrics.get('energy_efficiency', 0) * 0.3
+        + sustainability_metrics.get('water_usage', 0) * 0.2
+        + sustainability_metrics.get('green_materials', 0) * 0.2
+        + sustainability_metrics.get('waste_reduction', 0) * 0.15
+        + (100 - min(100, sustainability_metrics.get('carbon_footprint', 50000) / 500)) * 0.15
     )
 
     if total_score >= 80:
@@ -324,11 +324,11 @@ def assess_project_sustainability(
 
     # Overall score calculation
     overall_score = (
-        energy_efficiency * 0.25 +
-        water_usage * 0.2 +
-        green_materials_score * 0.2 +
-        waste_reduction * 0.15 +
-        max(0, 100 - carbon_footprint / 1000) * 0.2  # Carbon footprint contribution (inverted)
+        energy_efficiency * 0.25
+        + water_usage * 0.2
+        + green_materials_score * 0.2
+        + waste_reduction * 0.15
+        + max(0, 100 - carbon_footprint / 1000) * 0.2  # Carbon footprint contribution (inverted)
     )
 
     # LEED potential assessment

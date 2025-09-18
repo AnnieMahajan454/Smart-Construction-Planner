@@ -290,20 +290,20 @@ def calculate_site_suitability(
 
     # Calculate component scores
     accessibility_score = (
-        accessibility_data['public_transport_score'] * 0.4 +
-        accessibility_data['walkability_score'] * 0.3 +
-        accessibility_data['parking_availability'] * 0.3
+        accessibility_data['public_transport_score'] * 0.4
+        + accessibility_data['walkability_score'] * 0.3
+        + accessibility_data['parking_availability'] * 0.3
     )
 
     safety_score = (
-        max(0, 100 - accessibility_data['emergency_services_distance'] * 20) * 0.6 +
-        (100 - accessibility_data['traffic_congestion']) * 0.4
+        max(0, 100 - accessibility_data['emergency_services_distance'] * 20) * 0.6
+        + (100 - accessibility_data['traffic_congestion']) * 0.4
     )
 
     amenities_score = (
-        accessibility_data['public_transport_score'] * 0.5 +
-        accessibility_data['bicycle_infrastructure'] * 0.3 +
-        accessibility_data['walkability_score'] * 0.2
+        accessibility_data['public_transport_score'] * 0.5
+        + accessibility_data['bicycle_infrastructure'] * 0.3
+        + accessibility_data['walkability_score'] * 0.2
     )
 
     # Environmental score (simplified)
@@ -311,10 +311,10 @@ def calculate_site_suitability(
 
     # Calculate weighted overall score
     overall_score = (
-        accessibility_score * weights['accessibility'] +
-        safety_score * weights['safety'] +
-        amenities_score * weights['amenities'] +
-        environmental_score * weights['environment']
+        accessibility_score * weights['accessibility']
+        + safety_score * weights['safety']
+        + amenities_score * weights['amenities']
+        + environmental_score * weights['environment']
     )
 
     return {
