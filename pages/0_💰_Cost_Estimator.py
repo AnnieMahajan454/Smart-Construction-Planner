@@ -35,16 +35,16 @@ else:
     ai_enabled = False
     conversation = None
 
-#City Base Rates
+#Indian City Base Rates (INR per m²)
 city_base_rates = {
-    'New York': 3500,
-    'San Francisco': 3400,
-    'Los Angeles': 3000,
-    'Chicago': 2600,
-    'Miami': 2500,
-    'Dallas': 2400,
-    'Houston': 2300,
-    'Atlanta': 2200
+    'Mumbai': 85000,
+    'Delhi': 75000,
+    'Bangalore': 70000,
+    'Hyderabad': 65000,
+    'Chennai': 68000,
+    'Kolkata': 60000,
+    'Pune': 72000,
+    'Ahmedabad': 58000
 }
 
 #Load Dataset
@@ -101,7 +101,7 @@ model.fit(X, y)
 
 # Helper function to prepare input
 def prepare_features(project_type, location, total_area, floors, basements):
-    base_rate = city_base_rates.get(location, 2500)
+    base_rate = city_base_rates.get(location, 65000)  # Default INR rate
     base_cost = total_area * base_rate
 
     material_cost = base_cost * 0.6 * (1 + 0.05 * (floors - 1) + 0.10 * basements)
@@ -134,7 +134,7 @@ st.write("This graph visualizes the total construction costs grouped by location
 fig4, ax4 = plt.subplots()
 sns.barplot(data=df_original, x="Location", y="Total_Estimate", estimator=sum, ci=None, ax=ax4)
 ax4.set_xlabel("Location")
-ax4.set_ylabel("Total Estimated Cost ($)")
+ax4.set_ylabel("Total Estimated Cost (₹)")
 ax4.set_title("Location-wise Total Construction Cost")
 plt.xticks(rotation=45)
 st.pyplot(fig4)
@@ -155,7 +155,7 @@ if st.button("Estimate Cost"):
     input_data = prepare_features(project_type, location, total_area, number_of_floors, number_of_basements)
     predicted_cost = model.predict(input_data)[0]
 
-    st.success(f"Predicted Total Construction Cost: ${predicted_cost:,.0f}")
+    st.success(f"Predicted Total Construction Cost: ₹{predicted_cost:,.0f}")
 
     st.session_state['base_project'] = {
         'project_type': project_type,
@@ -198,7 +198,7 @@ if st.button("Simulate What-If"):
         input_data = prepare_features(base['project_type'], base['location'], updated_area, updated_floors, updated_basements)
         new_predicted_cost = model.predict(input_data)[0]
 
-        st.success(f"Updated Total Estimated Cost after change: ${new_predicted_cost:,.0f}")
+        st.success(f"Updated Total Estimated Cost after change: ₹{new_predicted_cost:,.0f}")
 
         if ai_enabled:
             what_if_prompt = f"""
@@ -208,7 +208,7 @@ if st.button("Simulate What-If"):
             - Area: {base['total_area']} m²
             - Floors: {base['number_of_floors']}
             - Basements: {base['number_of_basements']}
-            - Initial Cost: ${base['predicted_cost']:,.0f}
+            - Initial Cost: ₹{base['predicted_cost']:,.0f}
 
             Change:
             "{what_if_change}"
@@ -217,7 +217,7 @@ if st.button("Simulate What-If"):
             - Area: {updated_area:.2f} m²
             - Floors: {updated_floors}
             - Basements: {updated_basements}
-            - New Cost: ${new_predicted_cost:,.0f}
+            - New Cost: ₹{new_predicted_cost:,.0f}
 
             Please explain simply:
             - Why cost changed
@@ -228,7 +228,7 @@ if st.button("Simulate What-If"):
         else:
             cost_change = new_predicted_cost - base['predicted_cost']
             cost_change_pct = (cost_change / base['predicted_cost']) * 100
-            st.info(f"**Cost Analysis:** The change resulted in a ${cost_change:,.0f} ({cost_change_pct:+.1f}%) cost difference. Enable AI features for detailed explanations.")
+            st.info(f"**Cost Analysis:** The change resulted in a ₹{cost_change:,.0f} ({cost_change_pct:+.1f}%) cost difference. Enable AI features for detailed explanations.")
 
 # General Construction Chatbot Section
 st.header("Construction Expert Chatbot")
