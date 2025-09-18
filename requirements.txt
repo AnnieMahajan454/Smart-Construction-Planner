@@ -37,3 +37,7 @@ aiohttp
 websockets
 requests
 pydantic
+
+# Deployment & additional tools
+streamlit-folium
+streamlit-option-menu
