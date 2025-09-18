@@ -2,7 +2,7 @@
 
 An AI‑assisted toolkit for data‑driven site design and construction planning. It fuses pedestrian flow, geospatial context, utilities, traffic, and weather data to forecast demand, assess accessibility, surface risks, and provide comprehensive project analytics. Planners get fast, practical recommendations and what‑if analysis to design safer, more inclusive, and sustainable construction projects with confidence.
 
-## ✨ Enhanced Key Features
+## Enhanced Key Features
 - **🤖 AI-Powered Cost Estimation**: Machine learning models for accurate project cost prediction
 - **🌱 Sustainability Assessment**: Comprehensive environmental impact analysis with LEED potential scoring
 - **⚠️ Risk Assessment**: Multi-factor risk analysis including weather, seismic, regulatory, and material risks
@@ -35,7 +35,7 @@ An AI‑assisted toolkit for data‑driven site design and construction planning
 - `pages/1_Enhanced_Analytics.py`: **NEW** - Advanced analytics with sustainability, risk, and timeline analysis
 - `pages/2_Interactive_Maps.py`: **NEW** - Interactive site mapping with accessibility assessment
 
-## 🚀 Live Demo
+## Live Demo
 
 **Try the application online:** [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://smart-construction-planner.streamlit.app)
 
