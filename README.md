@@ -1,12 +1,12 @@
-# 🏗️ Smart Construction Planner - India 🇮🇳
+# 🏗️ Smart Construction Planner - India
 
 > **AI-Powered Construction Planning & Cost Estimation for Indian Cities**
 
 A comprehensive AI-assisted toolkit specifically designed for the Indian construction market. Leveraging advanced machine learning models, risk assessment algorithms, and sustainability metrics, this application provides accurate cost estimation, timeline planning, and project analysis for major Indian cities.
 
-## 🌟 Key Highlights
+## Key Highlights
 
-- **🇮🇳 India-Focused**: Localized for 8+ major Indian cities with INR currency
+- **India-Focused**: Localized for 8+ major Indian cities with INR currency
 - **🤖 AI/ML Powered**: 5+ machine learning models working without API requirements
 - **💰 Accurate Cost Estimation**: Random Forest models trained on Indian construction data
 - **⚠️ Comprehensive Risk Assessment**: Weather (monsoons, cyclones), seismic, regulatory risks
@@ -95,7 +95,7 @@ smart_planner/
 - **Green Materials**: Sustainable construction material assessment
 - **LEED Prediction**: Certification potential analysis
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### **Cost Estimation**
 ```python
@@ -157,7 +157,7 @@ pip install -r requirements.txt
 streamlit run Home.py
 ```
 
-## 🌐 Optional: AI Chatbot Setup
+## Optional: AI Chatbot Setup
 
 For enhanced AI features, add OpenAI API key:
 
@@ -216,7 +216,7 @@ streamlit run Home.py
 
 ## 🤝 Contributing
 
-We welcome contributions to enhance the Indian construction planning experience:
+Contributions to enhance the Indian construction planning experienceare welcomed:
 
 1. **Fork** the repository
 2. **Create** feature branch (`git checkout -b feature/indian-cities`)
@@ -230,16 +230,6 @@ We welcome contributions to enhance the Indian construction planning experience:
 - Local material cost databases
 - State-specific regulatory requirements
 - Vernacular architecture considerations
-
-## 📞 Support & Contact
-
-- **GitHub Issues**: Report bugs and request features
-- **Documentation**: Check wiki for detailed guides
-- **Community**: Join discussions in GitHub Discussions
-
----
-
-**Built with ❤️ for the Indian Construction Industry**
 
 *Empowering smarter construction decisions across India with AI and data science*
 
