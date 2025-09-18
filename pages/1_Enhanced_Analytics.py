@@ -31,10 +31,10 @@ def estimate_project_timeline(
     complexity_factors: dict = None
 ) -> dict:
     """Estimate project timeline based on various factors."""
-    
+
     if complexity_factors is None:
         complexity_factors = {}
-    
+
     # Base construction rates (days per m²) by project type
     base_rates = {
         'Residential': 0.8,
@@ -42,7 +42,7 @@ def estimate_project_timeline(
         'Industrial': 1.0,
         'Institutional': 1.5
     }
-    
+
     # Location multipliers (permitting and labor availability)
     location_multipliers = {
         'New York': 1.3,
@@ -54,19 +54,19 @@ def estimate_project_timeline(
         'Houston': 0.9,
         'Atlanta': 1.0
     }
-    
+
     base_construction_days = total_area * base_rates.get(project_type, 1.0)
     location_factor = location_multipliers.get(location, 1.0)
-    
+
     # Floor complexity
     floor_factor = 1 + (number_of_floors - 1) * 0.15
-    
+
     # Design and permitting phase (typically 15-25% of total timeline)
     design_permitting_days = base_construction_days * 0.2 * location_factor
-    
+
     # Construction phase
     construction_days = base_construction_days * location_factor * floor_factor
-    
+
     # Complexity factors
     if complexity_factors.get('complex_design', False):
         construction_days *= 1.2
@@ -74,12 +74,12 @@ def estimate_project_timeline(
         construction_days *= 1.1
     if complexity_factors.get('historic_renovation', False):
         construction_days *= 1.4
-    
+
     # Closeout phase
     closeout_days = construction_days * 0.1
-    
+
     total_days = design_permitting_days + construction_days + closeout_days
-    
+
     return {
         'total_days': int(total_days),
         'design_permitting_days': int(design_permitting_days),
@@ -95,9 +95,9 @@ def create_gantt_chart(timeline_dict: dict) -> go.Figure:
     
     phases = [
         {'Task': 'Design & Permitting', 'Start': 0, 'Duration': timeline_dict['design_permitting_days']},
-        {'Task': 'Construction', 'Start': timeline_dict['design_permitting_days'], 
+        {'Task': 'Construction', 'Start': timeline_dict['design_permitting_days'],
          'Duration': timeline_dict['construction_days']},
-        {'Task': 'Closeout & Handover', 
+        {'Task': 'Closeout & Handover',
          'Start': timeline_dict['design_permitting_days'] + timeline_dict['construction_days'],
          'Duration': timeline_dict['closeout_days']}
     ]
@@ -247,12 +247,12 @@ def main():
     
     # Advanced options
     with st.sidebar.expander("Advanced Options"):
-        project_start_month = st.selectbox("Project Start Month", 
-                                         range(1, 13), 
+        project_start_month = st.selectbox("Project Start Month",
+                                         range(1, 13),
                                          format_func=lambda x: [
                                              'January', 'February', 'March', 'April', 'May', 'June',
                                              'July', 'August', 'September', 'October', 'November', 'December'
-                                         ][x-1])
+                                         ][x - 1])
         
         materials = st.multiselect("Primary Materials",
                                  ['Steel', 'Concrete', 'Lumber', 'Aluminum', 'Glass', 'Insulation'],
@@ -298,7 +298,7 @@ def main():
         with col2:
             st.metric("Construction Phase", f"{timeline['construction_days']} days",
                      f"{timeline['construction_days']/timeline['total_days']*100:.0f}% of total")
-        
+
         with col3:
             st.metric("Design & Permitting", f"{timeline['design_permitting_days']} days",
                      f"{timeline['design_permitting_days']/timeline['total_days']*100:.0f}% of total")
@@ -315,9 +315,9 @@ def main():
                               timeline['construction_days'], 
                               timeline['closeout_days']],
             'Percentage': [
-                timeline['design_permitting_days']/timeline['total_days']*100,
-                timeline['construction_days']/timeline['total_days']*100,
-                timeline['closeout_days']/timeline['total_days']*100
+                timeline['design_permitting_days'] / timeline['total_days'] * 100,
+                timeline['construction_days'] / timeline['total_days'] * 100,
+                timeline['closeout_days'] / timeline['total_days'] * 100
             ]
         })
         
