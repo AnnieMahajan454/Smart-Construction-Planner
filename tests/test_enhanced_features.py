@@ -84,18 +84,18 @@ def test_enhanced_features_integration():
             "location": "Chicago",
             "materials": ["steel", "concrete", "aluminum"]
         }
-        
+
         # Test sustainability
         sustainability = assess_project_sustainability(**project_params)
         assert sustainability is not None
-        
+
         # Test risk assessment
         risks = assess_project_risks(**project_params)
         assert risks is not None
-        
+
         # Verify they produce consistent results
         assert isinstance(sustainability.overall_score, (int, float))
         assert isinstance(risks.overall_risk_score, (int, float))
-        
+
     except ImportError:
         pytest.skip("Enhanced features modules not available")
