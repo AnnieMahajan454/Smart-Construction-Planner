@@ -1,0 +1,39 @@
+langchain
+python-dotenv
+ipykernel
+langchain-community
+langchain-text-splitters
+langchain-openai
+sentence_transformers
+langchain_huggingface
+langchain_chroma
+pandas
+openai
+streamlit
+scikit-learn
+numpy
+matplotlib
+seaborn
+
+# Geospatial & routing
+geopandas
+shapely
+pyproj
+rtree
+osmnx
+networkx
+h3
+folium
+
+# Modeling
+xgboost
+lightgbm
+catboost
+
+# API & realtime
+fastapi
+uvicorn
+aiohttp
+websockets
+requests
+pydantic

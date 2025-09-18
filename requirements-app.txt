@@ -1,0 +1,17 @@
+# Minimal requirements for Streamlit app deployment
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+scipy
+python-dotenv
+langchain
+langchain-openai
+langchain-community
+requests
+plotly
+folium
+streamlit-folium
+geopy
