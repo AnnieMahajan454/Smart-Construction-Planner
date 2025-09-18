@@ -492,8 +492,9 @@ def main():
             st.metric("Base Cost", f"${total_cost:,.0f}")
 
         with col2:
-            st.metric("Risk-Adjusted", f"${adjusted_cost:,.0f}",
-                     f"${adjusted_cost - total_cost:,.0f}")
+            st.metric(
+                "Risk-Adjusted", f"${adjusted_cost:,.0f}",
+                f"${adjusted_cost - total_cost:,.0f}")
 
         with col3:
             st.metric("Cost per mÂ²", f"${adjusted_cost/total_area:,.0f}")

@@ -498,8 +498,9 @@ def main():
             else:
                 color = "red"
 
-            st.markdown(f"**Recommendation:** <span style='color: {color}'>{suitability['recommendation']}</span>",
-                       unsafe_allow_html=True)
+            st.markdown(
+                f"**Recommendation:** <span style='color: {color}'>{suitability['recommendation']}</span>",
+                unsafe_allow_html=True)
 
         with col2:
             st.write("**Component Scores:**")
