@@ -308,7 +308,7 @@ def main():
 
         # Gantt Chart
         gantt_fig = create_gantt_chart(timeline)
-        st.plotly_chart(gantt_fig, use_container_width=True)
+        st.plotly_chart(gantt_fig, width='stretch')
 
         # Timeline breakdown
         st.subheader("Phase Breakdown")
@@ -324,7 +324,7 @@ def main():
             ]
         })
 
-        st.dataframe(phase_data, use_container_width=True)
+        st.dataframe(phase_data, width='stretch')
 
     with tab2:
         st.header("Sustainability Assessment")
@@ -368,7 +368,7 @@ def main():
 
         # Sustainability radar chart
         radar_fig = create_sustainability_radar(sustainability)
-        st.plotly_chart(radar_fig, use_container_width=True)
+        st.plotly_chart(radar_fig, width='stretch')
 
         # Detailed breakdown
         st.subheader("Sustainability Breakdown")
@@ -384,7 +384,7 @@ def main():
             ]
         })
 
-        st.dataframe(sustainability_df, use_container_width=True)
+        st.dataframe(sustainability_df, width='stretch')
 
         # Recommendations
         st.subheader("Sustainability Recommendations")
@@ -424,7 +424,7 @@ def main():
 
         # Risk heatmap
         risk_heatmap = create_risk_heatmap(risk_assessment)
-        st.plotly_chart(risk_heatmap, use_container_width=True)
+        st.plotly_chart(risk_heatmap, width='stretch')
 
         # Individual risk factors
         st.subheader("Risk Factor Details")
@@ -516,7 +516,7 @@ def main():
             values=list(cost_breakdown.values()),
             names=list(cost_breakdown.keys()),
             title="Cost Breakdown by Category")
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
         # Cost comparison by location
         st.subheader("Cost Comparison by Location")
@@ -533,8 +533,8 @@ def main():
         fig = px.bar(
             cost_comparison_df, x='Location', y='Estimated Cost',
             title="Cost Comparison Across Locations")
-        fig.update_xaxis(tickangle=45)
-        st.plotly_chart(fig, use_container_width=True)
+        fig.update_layout(xaxis_tickangle=45)
+        st.plotly_chart(fig, width='stretch')
 
 
 if __name__ == "__main__":
