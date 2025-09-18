@@ -19,16 +19,16 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 def get_coordinates(city_name: str) -> tuple:
     """Get latitude and longitude for a city."""
 
-    # Predefined coordinates for major cities
+    # Predefined coordinates for major Indian cities
     city_coords = {
-        'New York': (40.7128, -74.0060),
-        'San Francisco': (37.7749, -122.4194),
-        'Los Angeles': (34.0522, -118.2437),
-        'Chicago': (41.8781, -87.6298),
-        'Miami': (25.7617, -80.1918),
-        'Dallas': (32.7767, -96.7970),
-        'Houston': (29.7604, -95.3698),
-        'Atlanta': (33.7490, -84.3880)
+        'Mumbai': (19.0760, 72.8777),
+        'Delhi': (28.7041, 77.1025),
+        'Bangalore': (12.9716, 77.5946),
+        'Hyderabad': (17.3850, 78.4867),
+        'Chennai': (13.0827, 80.2707),
+        'Kolkata': (22.5726, 88.3639),
+        'Pune': (18.5204, 73.8567),
+        'Ahmedabad': (23.0225, 72.5714)
     }
 
     if city_name in city_coords:
@@ -42,8 +42,8 @@ def get_coordinates(city_name: str) -> tuple:
     except Exception:
         pass
 
-    # Default to New York if geocoding fails
-    return (40.7128, -74.0060)
+    # Default to Mumbai if geocoding fails
+    return (19.0760, 72.8777)
 
 
 def create_site_map(location: str, project_sites: list = None) -> folium.Map:
@@ -134,75 +134,75 @@ def create_site_map(location: str, project_sites: list = None) -> folium.Map:
 def analyze_site_accessibility(location: str) -> dict:
     """Analyze site accessibility metrics."""
 
-    # Simulated accessibility data based on city characteristics
+    # Accessibility data for Indian cities
     accessibility_data = {
-        'New York': {
-            'public_transport_score': 95,
-            'walkability_score': 85,
-            'bicycle_infrastructure': 78,
-            'parking_availability': 40,
-            'traffic_congestion': 85,
-            'emergency_services_distance': 0.5
+        'Mumbai': {
+            'public_transport_score': 90,
+            'walkability_score': 70,
+            'bicycle_infrastructure': 60,
+            'parking_availability': 30,
+            'traffic_congestion': 95,
+            'emergency_services_distance': 0.8
         },
-        'San Francisco': {
-            'public_transport_score': 88,
-            'walkability_score': 82,
-            'bicycle_infrastructure': 90,
-            'parking_availability': 35,
+        'Delhi': {
+            'public_transport_score': 85,
+            'walkability_score': 65,
+            'bicycle_infrastructure': 55,
+            'parking_availability': 40,
+            'traffic_congestion': 90,
+            'emergency_services_distance': 0.9
+        },
+        'Bangalore': {
+            'public_transport_score': 75,
+            'walkability_score': 70,
+            'bicycle_infrastructure': 45,
+            'parking_availability': 50,
+            'traffic_congestion': 85,
+            'emergency_services_distance': 1.0
+        },
+        'Hyderabad': {
+            'public_transport_score': 70,
+            'walkability_score': 65,
+            'bicycle_infrastructure': 40,
+            'parking_availability': 60,
+            'traffic_congestion': 75,
+            'emergency_services_distance': 1.2
+        },
+        'Chennai': {
+            'public_transport_score': 80,
+            'walkability_score': 68,
+            'bicycle_infrastructure': 50,
+            'parking_availability': 45,
             'traffic_congestion': 80,
             'emergency_services_distance': 0.7
         },
-        'Los Angeles': {
-            'public_transport_score': 65,
-            'walkability_score': 60,
-            'bicycle_infrastructure': 55,
-            'parking_availability': 70,
-            'traffic_congestion': 90,
-            'emergency_services_distance': 1.2
-        },
-        'Chicago': {
+        'Kolkata': {
             'public_transport_score': 85,
             'walkability_score': 75,
-            'bicycle_infrastructure': 70,
-            'parking_availability': 55,
-            'traffic_congestion': 75,
-            'emergency_services_distance': 0.8
+            'bicycle_infrastructure': 65,
+            'parking_availability': 35,
+            'traffic_congestion': 85,
+            'emergency_services_distance': 0.6
         },
-        'Miami': {
+        'Pune': {
+            'public_transport_score': 65,
+            'walkability_score': 70,
+            'bicycle_infrastructure': 55,
+            'parking_availability': 55,
+            'traffic_congestion': 70,
+            'emergency_services_distance': 1.1
+        },
+        'Ahmedabad': {
             'public_transport_score': 60,
             'walkability_score': 65,
-            'bicycle_infrastructure': 45,
-            'parking_availability': 75,
-            'traffic_congestion': 70,
-            'emergency_services_distance': 1.0
-        },
-        'Dallas': {
-            'public_transport_score': 55,
-            'walkability_score': 50,
-            'bicycle_infrastructure': 40,
-            'parking_availability': 85,
+            'bicycle_infrastructure': 50,
+            'parking_availability': 70,
             'traffic_congestion': 65,
             'emergency_services_distance': 1.5
-        },
-        'Houston': {
-            'public_transport_score': 50,
-            'walkability_score': 45,
-            'bicycle_infrastructure': 35,
-            'parking_availability': 90,
-            'traffic_congestion': 70,
-            'emergency_services_distance': 1.8
-        },
-        'Atlanta': {
-            'public_transport_score': 70,
-            'walkability_score': 55,
-            'bicycle_infrastructure': 50,
-            'parking_availability': 80,
-            'traffic_congestion': 75,
-            'emergency_services_distance': 1.3
         }
     }
 
-    return accessibility_data.get(location, accessibility_data['Chicago'])  # Default to Chicago
+    return accessibility_data.get(location, accessibility_data['Mumbai'])  # Default to Mumbai
 
 
 def create_accessibility_chart(accessibility_data: dict) -> go.Figure:
@@ -352,7 +352,7 @@ def main():
     st.sidebar.header("Site Configuration")
 
     project_types = ['Residential', 'Commercial', 'Industrial', 'Institutional']
-    locations = ['New York', 'San Francisco', 'Los Angeles', 'Chicago', 'Miami', 'Dallas', 'Houston', 'Atlanta']
+    locations = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad']
 
     location = st.sidebar.selectbox("Primary Location", locations)
     project_type = st.sidebar.selectbox("Project Type", project_types)
@@ -441,7 +441,7 @@ def main():
 
         # Accessibility radar chart
         accessibility_chart = create_accessibility_chart(accessibility_data)
-        st.plotly_chart(accessibility_chart, use_container_width=True)
+        st.plotly_chart(accessibility_chart, width='stretch')
 
         # Detailed breakdown
         st.subheader("Accessibility Breakdown")
@@ -473,7 +473,7 @@ def main():
             ]
         })
 
-        st.dataframe(accessibility_df, use_container_width=True)
+        st.dataframe(accessibility_df, width='stretch')
 
     with tab3:
         st.header("Site Suitability Assessment")
@@ -529,7 +529,7 @@ def main():
             height=400
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
 
         # Site improvement recommendations
         st.subheader("Site Improvement Recommendations")

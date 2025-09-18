@@ -43,16 +43,16 @@ def estimate_project_timeline(
         'Institutional': 1.5
     }
 
-    # Location multipliers (permitting and labor availability)
+    # Location multipliers (permitting and labor availability) for Indian cities
     location_multipliers = {
-        'New York': 1.3,
-        'San Francisco': 1.4,
-        'Los Angeles': 1.2,
-        'Chicago': 1.1,
-        'Miami': 1.0,
-        'Dallas': 0.9,
-        'Houston': 0.9,
-        'Atlanta': 1.0
+        'Mumbai': 1.4,
+        'Delhi': 1.3,
+        'Bangalore': 1.2,
+        'Hyderabad': 1.1,
+        'Chennai': 1.1,
+        'Kolkata': 1.0,
+        'Pune': 1.2,
+        'Ahmedabad': 0.9
     }
 
     base_construction_days = total_area * base_rates.get(project_type, 1.0)
@@ -226,7 +226,7 @@ def create_risk_heatmap(risk_assessment) -> go.Figure:
 def main():
     """Main enhanced analytics page."""
 
-    st.title("ðŸ—ï¸ Enhanced Construction Analytics")
+    st.title("🏗️ Enhanced Construction Analytics")
     st.markdown("Advanced analytics and insights for your construction project")
 
     if not ADVANCED_FEATURES_AVAILABLE:
@@ -237,11 +237,11 @@ def main():
     st.sidebar.header("Project Configuration")
 
     project_types = ['Residential', 'Commercial', 'Industrial', 'Institutional']
-    locations = ['New York', 'San Francisco', 'Los Angeles', 'Chicago', 'Miami', 'Dallas', 'Houston', 'Atlanta']
+    locations = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Pune', 'Ahmedabad']
 
     project_type = st.sidebar.selectbox("Project Type", project_types)
     location = st.sidebar.selectbox("Location", locations)
-    total_area = st.sidebar.number_input("Total Area (mÂ²)", min_value=50.0, value=1000.0, step=50.0)
+    total_area = st.sidebar.number_input("Total Area (m²)", min_value=50.0, value=1000.0, step=50.0)
     number_of_floors = st.sidebar.number_input("Number of Floors", min_value=1, max_value=50, value=2)
     number_of_basements = st.sidebar.number_input("Number of Basements", min_value=0, max_value=5, value=0)
 
@@ -451,19 +451,19 @@ def main():
     with tab4:
         st.header("Enhanced Cost Analysis")
 
-        # Basic cost calculation (simplified for demo)
+        # Basic cost calculation for Indian cities (₹ per m²)
         base_rates = {
-            'New York': 3500,
-            'San Francisco': 3400,
-            'Los Angeles': 3000,
-            'Chicago': 2600,
-            'Miami': 2500,
-            'Dallas': 2400,
-            'Houston': 2300,
-            'Atlanta': 2200
+            'Mumbai': 85000,
+            'Delhi': 75000,
+            'Bangalore': 70000,
+            'Hyderabad': 60000,
+            'Chennai': 65000,
+            'Kolkata': 50000,
+            'Pune': 72000,
+            'Ahmedabad': 55000
         }
 
-        base_rate = base_rates.get(location, 2500)
+        base_rate = base_rates.get(location, 60000)
         base_cost = total_area * base_rate
 
         # Apply multipliers
@@ -489,19 +489,19 @@ def main():
         col1, col2, col3, col4 = st.columns(4)
 
         with col1:
-            st.metric("Base Cost", f"${total_cost:,.0f}")
+            st.metric("Base Cost", f"₹{total_cost:,.0f}")
 
         with col2:
             st.metric(
-                "Risk-Adjusted", f"${adjusted_cost:,.0f}",
-                f"${adjusted_cost - total_cost:,.0f}")
+                "Risk-Adjusted", f"₹{adjusted_cost:,.0f}",
+                f"₹{adjusted_cost - total_cost:,.0f}")
 
         with col3:
-            st.metric("Cost per mÂ²", f"${adjusted_cost/total_area:,.0f}")
+            st.metric("Cost per m²", f"₹{adjusted_cost/total_area:,.0f}")
 
         with col4:
             contingency = adjusted_cost * 0.15
-            st.metric("With 15% Contingency", f"${adjusted_cost + contingency:,.0f}")
+            st.metric("With 15% Contingency", f"₹{adjusted_cost + contingency:,.0f}")
 
         # Cost breakdown chart
         cost_breakdown = {

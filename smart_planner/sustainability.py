@@ -35,16 +35,16 @@ def calculate_carbon_footprint(
         'Institutional': 300
     }
 
-    # Location multipliers for local energy grid carbon intensity
+    # Location multipliers for Indian cities energy grid carbon intensity
     location_multipliers = {
-        'New York': 0.9,
-        'San Francisco': 0.7,  # Cleaner grid
-        'Los Angeles': 0.85,
-        'Chicago': 1.0,
-        'Miami': 1.1,
-        'Dallas': 1.2,
-        'Houston': 1.3,  # Heavy fossil fuel reliance
-        'Atlanta': 1.15
+        'Mumbai': 1.1,
+        'Delhi': 1.3,  # Higher pollution
+        'Bangalore': 0.9,  # Better renewable integration
+        'Hyderabad': 1.0,
+        'Chennai': 1.0,
+        'Kolkata': 1.2,  # Coal dependency
+        'Pune': 0.95,
+        'Ahmedabad': 1.1
     }
 
     base_footprint = total_area * base_intensity.get(project_type, 400)
@@ -77,16 +77,16 @@ def assess_energy_efficiency(
 
     base_score = 50  # Baseline
 
-    # Climate zone adjustments
+    # Climate zone adjustments for Indian cities
     climate_zones = {
-        'New York': 'cold',
-        'San Francisco': 'mild',
-        'Los Angeles': 'warm',
-        'Chicago': 'cold',
-        'Miami': 'hot',
-        'Dallas': 'hot',
-        'Houston': 'hot',
-        'Atlanta': 'warm'
+        'Mumbai': 'hot',
+        'Delhi': 'hot',
+        'Bangalore': 'mild',
+        'Hyderabad': 'hot',
+        'Chennai': 'hot',
+        'Kolkata': 'hot',
+        'Pune': 'warm',
+        'Ahmedabad': 'hot'
     }
 
     climate = climate_zones.get(location, 'mild')
@@ -139,16 +139,16 @@ def calculate_water_usage_score(
         'Institutional': 600
     }
 
-    # Water scarcity by location (higher = more scarce)
+    # Water scarcity by Indian cities (higher = more scarce)
     water_scarcity = {
-        'New York': 0.3,
-        'San Francisco': 0.8,
-        'Los Angeles': 0.9,
-        'Chicago': 0.2,
-        'Miami': 0.4,
-        'Dallas': 0.7,
-        'Houston': 0.6,
-        'Atlanta': 0.5
+        'Mumbai': 0.6,
+        'Delhi': 0.8,
+        'Bangalore': 0.7,
+        'Hyderabad': 0.6,
+        'Chennai': 0.9,  # High water stress
+        'Kolkata': 0.4,
+        'Pune': 0.7,
+        'Ahmedabad': 0.8
     }
 
     base_usage = total_area * base_consumption.get(project_type, 1000)

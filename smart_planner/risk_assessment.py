@@ -44,55 +44,55 @@ class ProjectRiskAssessment:
 def assess_weather_risk(location: str, project_start_month: int) -> RiskFactor:
     """Assess weather-related construction risks."""
 
-    # Weather risk data by location and season
+    # Weather risk data by Indian cities and season
     weather_risks = {
-        'New York': {
-            'winter': {'probability': 0.8, 'impact': 7, 'main_risk': 'snow and freezing'},
-            'spring': {'probability': 0.4, 'impact': 4, 'main_risk': 'rain'},
-            'summer': {'probability': 0.2, 'impact': 3, 'main_risk': 'thunderstorms'},
-            'fall': {'probability': 0.3, 'impact': 4, 'main_risk': 'early cold weather'}
+        'Mumbai': {
+            'winter': {'probability': 0.1, 'impact': 2, 'main_risk': 'minimal weather impact'},
+            'spring': {'probability': 0.3, 'impact': 4, 'main_risk': 'pre-monsoon heat'},
+            'summer': {'probability': 0.9, 'impact': 8, 'main_risk': 'monsoon rains and flooding'},
+            'fall': {'probability': 0.4, 'impact': 5, 'main_risk': 'post-monsoon storms'}
         },
-        'San Francisco': {
-            'winter': {'probability': 0.5, 'impact': 4, 'main_risk': 'rain and fog'},
-            'spring': {'probability': 0.3, 'impact': 3, 'main_risk': 'fog'},
-            'summer': {'probability': 0.1, 'impact': 2, 'main_risk': 'minimal weather impact'},
-            'fall': {'probability': 0.2, 'impact': 3, 'main_risk': 'early rains'}
+        'Delhi': {
+            'winter': {'probability': 0.6, 'impact': 6, 'main_risk': 'fog and poor visibility'},
+            'spring': {'probability': 0.4, 'impact': 5, 'main_risk': 'dust storms'},
+            'summer': {'probability': 0.7, 'impact': 7, 'main_risk': 'extreme heat and dust storms'},
+            'fall': {'probability': 0.2, 'impact': 3, 'main_risk': 'minimal weather impact'}
         },
-        'Los Angeles': {
-            'winter': {'probability': 0.3, 'impact': 3, 'main_risk': 'occasional rain'},
-            'spring': {'probability': 0.1, 'impact': 2, 'main_risk': 'minimal weather impact'},
-            'summer': {'probability': 0.2, 'impact': 4, 'main_risk': 'extreme heat'},
-            'fall': {'probability': 0.4, 'impact': 5, 'main_risk': 'fire season and Santa Ana winds'}
-        },
-        'Chicago': {
-            'winter': {'probability': 0.9, 'impact': 8, 'main_risk': 'severe cold and snow'},
-            'spring': {'probability': 0.5, 'impact': 5, 'main_risk': 'severe storms'},
-            'summer': {'probability': 0.3, 'impact': 4, 'main_risk': 'thunderstorms'},
-            'fall': {'probability': 0.4, 'impact': 4, 'main_risk': 'early winter weather'}
-        },
-        'Miami': {
+        'Bangalore': {
             'winter': {'probability': 0.1, 'impact': 2, 'main_risk': 'minimal weather impact'},
             'spring': {'probability': 0.2, 'impact': 3, 'main_risk': 'occasional storms'},
-            'summer': {'probability': 0.8, 'impact': 7, 'main_risk': 'hurricane season'},
-            'fall': {'probability': 0.7, 'impact': 6, 'main_risk': 'continued hurricane season'}
+            'summer': {'probability': 0.5, 'impact': 5, 'main_risk': 'monsoon rains'},
+            'fall': {'probability': 0.3, 'impact': 4, 'main_risk': 'post-monsoon storms'}
         },
-        'Dallas': {
-            'winter': {'probability': 0.4, 'impact': 5, 'main_risk': 'ice storms'},
-            'spring': {'probability': 0.7, 'impact': 6, 'main_risk': 'severe storms and tornadoes'},
-            'summer': {'probability': 0.5, 'impact': 6, 'main_risk': 'extreme heat'},
+        'Hyderabad': {
+            'winter': {'probability': 0.1, 'impact': 2, 'main_risk': 'minimal weather impact'},
+            'spring': {'probability': 0.3, 'impact': 4, 'main_risk': 'pre-monsoon heat'},
+            'summer': {'probability': 0.6, 'impact': 6, 'main_risk': 'monsoon rains and extreme heat'},
             'fall': {'probability': 0.2, 'impact': 3, 'main_risk': 'minimal weather impact'}
         },
-        'Houston': {
-            'winter': {'probability': 0.3, 'impact': 4, 'main_risk': 'occasional freezing'},
-            'spring': {'probability': 0.6, 'impact': 5, 'main_risk': 'severe storms'},
-            'summer': {'probability': 0.7, 'impact': 7, 'main_risk': 'hurricane season and flooding'},
-            'fall': {'probability': 0.5, 'impact': 5, 'main_risk': 'hurricane season'}
+        'Chennai': {
+            'winter': {'probability': 0.5, 'impact': 5, 'main_risk': 'northeast monsoon'},
+            'spring': {'probability': 0.4, 'impact': 5, 'main_risk': 'extreme heat'},
+            'summer': {'probability': 0.6, 'impact': 6, 'main_risk': 'southwest monsoon and cyclones'},
+            'fall': {'probability': 0.7, 'impact': 7, 'main_risk': 'cyclone season'}
         },
-        'Atlanta': {
-            'winter': {'probability': 0.5, 'impact': 5, 'main_risk': 'ice storms'},
-            'spring': {'probability': 0.6, 'impact': 5, 'main_risk': 'severe storms'},
-            'summer': {'probability': 0.4, 'impact': 4, 'main_risk': 'thunderstorms'},
+        'Kolkata': {
+            'winter': {'probability': 0.2, 'impact': 3, 'main_risk': 'fog'},
+            'spring': {'probability': 0.4, 'impact': 5, 'main_risk': 'thunderstorms and heat'},
+            'summer': {'probability': 0.8, 'impact': 7, 'main_risk': 'monsoon rains and flooding'},
+            'fall': {'probability': 0.5, 'impact': 5, 'main_risk': 'post-monsoon storms'}
+        },
+        'Pune': {
+            'winter': {'probability': 0.1, 'impact': 2, 'main_risk': 'minimal weather impact'},
+            'spring': {'probability': 0.3, 'impact': 4, 'main_risk': 'pre-monsoon heat'},
+            'summer': {'probability': 0.6, 'impact': 6, 'main_risk': 'monsoon rains'},
             'fall': {'probability': 0.2, 'impact': 3, 'main_risk': 'minimal weather impact'}
+        },
+        'Ahmedabad': {
+            'winter': {'probability': 0.1, 'impact': 2, 'main_risk': 'minimal weather impact'},
+            'spring': {'probability': 0.4, 'impact': 5, 'main_risk': 'dust storms and heat'},
+            'summer': {'probability': 0.7, 'impact': 7, 'main_risk': 'extreme heat and monsoon rains'},
+            'fall': {'probability': 0.3, 'impact': 4, 'main_risk': 'post-monsoon storms'}
         }
     }
 
@@ -105,7 +105,7 @@ def assess_weather_risk(location: str, project_start_month: int) -> RiskFactor:
     }
 
     season = season_map.get(project_start_month, 'spring')
-    location_risks = weather_risks.get(location, weather_risks['Chicago'])  # Default to moderate risk
+    location_risks = weather_risks.get(location, weather_risks['Hyderabad'])  # Default to moderate risk
     risk_data = location_risks[season]
 
     # Determine risk level
@@ -151,14 +151,14 @@ def assess_seismic_risk(location: str) -> RiskFactor:
     """Assess seismic risk based on location."""
 
     seismic_zones = {
-        'New York': {'probability': 0.1, 'impact': 4, 'zone': 'Low'},
-        'San Francisco': {'probability': 0.8, 'impact': 9, 'zone': 'Very High'},
-        'Los Angeles': {'probability': 0.7, 'impact': 8, 'zone': 'High'},
-        'Chicago': {'probability': 0.2, 'impact': 3, 'zone': 'Low'},
-        'Miami': {'probability': 0.05, 'impact': 2, 'zone': 'Very Low'},
-        'Dallas': {'probability': 0.1, 'impact': 3, 'zone': 'Low'},
-        'Houston': {'probability': 0.1, 'impact': 3, 'zone': 'Low'},
-        'Atlanta': {'probability': 0.15, 'impact': 4, 'zone': 'Low-Medium'}
+        'Mumbai': {'probability': 0.2, 'impact': 5, 'zone': 'Medium'},
+        'Delhi': {'probability': 0.6, 'impact': 7, 'zone': 'High'},
+        'Bangalore': {'probability': 0.1, 'impact': 3, 'zone': 'Low'},
+        'Hyderabad': {'probability': 0.1, 'impact': 3, 'zone': 'Low'},
+        'Chennai': {'probability': 0.05, 'impact': 2, 'zone': 'Very Low'},
+        'Kolkata': {'probability': 0.15, 'impact': 4, 'zone': 'Low-Medium'},
+        'Pune': {'probability': 0.2, 'impact': 4, 'zone': 'Medium'},
+        'Ahmedabad': {'probability': 0.7, 'impact': 8, 'zone': 'High'}
     }
 
     risk_data = seismic_zones.get(location, {'probability': 0.3, 'impact': 5, 'zone': 'Medium'})
@@ -197,16 +197,16 @@ def assess_seismic_risk(location: str) -> RiskFactor:
 def assess_regulatory_risk(project_type: str, location: str, total_area: float) -> RiskFactor:
     """Assess regulatory and permitting risks."""
 
-    # Base regulatory complexity by location
+    # Base regulatory complexity by Indian cities
     regulatory_complexity = {
-        'New York': {'base_risk': 8, 'permit_time': 16},
-        'San Francisco': {'base_risk': 9, 'permit_time': 20},
-        'Los Angeles': {'base_risk': 7, 'permit_time': 14},
-        'Chicago': {'base_risk': 6, 'permit_time': 12},
-        'Miami': {'base_risk': 5, 'permit_time': 10},
-        'Dallas': {'base_risk': 4, 'permit_time': 8},
-        'Houston': {'base_risk': 4, 'permit_time': 8},
-        'Atlanta': {'base_risk': 5, 'permit_time': 10}
+        'Mumbai': {'base_risk': 8, 'permit_time': 16},
+        'Delhi': {'base_risk': 9, 'permit_time': 20},
+        'Bangalore': {'base_risk': 6, 'permit_time': 12},
+        'Hyderabad': {'base_risk': 5, 'permit_time': 10},
+        'Chennai': {'base_risk': 7, 'permit_time': 14},
+        'Kolkata': {'base_risk': 6, 'permit_time': 12},
+        'Pune': {'base_risk': 5, 'permit_time': 10},
+        'Ahmedabad': {'base_risk': 4, 'permit_time': 8}
     }
 
     # Project type multipliers
@@ -266,16 +266,16 @@ def assess_regulatory_risk(project_type: str, location: str, total_area: float) 
 def assess_labor_risk(location: str, project_type: str, total_area: float) -> RiskFactor:
     """Assess labor availability and cost risks."""
 
-    # Labor market conditions by location
+    # Labor market conditions by Indian cities
     labor_markets = {
-        'New York': {'availability': 0.7, 'cost_volatility': 0.8, 'union_strength': 0.9},
-        'San Francisco': {'availability': 0.5, 'cost_volatility': 0.9, 'union_strength': 0.7},
-        'Los Angeles': {'availability': 0.6, 'cost_volatility': 0.7, 'union_strength': 0.8},
-        'Chicago': {'availability': 0.8, 'cost_volatility': 0.6, 'union_strength': 0.8},
-        'Miami': {'availability': 0.7, 'cost_volatility': 0.5, 'union_strength': 0.4},
-        'Dallas': {'availability': 0.8, 'cost_volatility': 0.4, 'union_strength': 0.3},
-        'Houston': {'availability': 0.9, 'cost_volatility': 0.5, 'union_strength': 0.4},
-        'Atlanta': {'availability': 0.8, 'cost_volatility': 0.4, 'union_strength': 0.5}
+        'Mumbai': {'availability': 0.7, 'cost_volatility': 0.7, 'union_strength': 0.8},
+        'Delhi': {'availability': 0.6, 'cost_volatility': 0.8, 'union_strength': 0.7},
+        'Bangalore': {'availability': 0.8, 'cost_volatility': 0.6, 'union_strength': 0.5},
+        'Hyderabad': {'availability': 0.8, 'cost_volatility': 0.5, 'union_strength': 0.4},
+        'Chennai': {'availability': 0.7, 'cost_volatility': 0.6, 'union_strength': 0.6},
+        'Kolkata': {'availability': 0.9, 'cost_volatility': 0.4, 'union_strength': 0.8},
+        'Pune': {'availability': 0.8, 'cost_volatility': 0.5, 'union_strength': 0.4},
+        'Ahmedabad': {'availability': 0.8, 'cost_volatility': 0.4, 'union_strength': 0.3}
     }
 
     market_data = labor_markets.get(location, {'availability': 0.7, 'cost_volatility': 0.6, 'union_strength': 0.6})

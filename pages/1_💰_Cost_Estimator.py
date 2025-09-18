@@ -25,14 +25,14 @@ else:
     conversation = None
 
 city_base_rates = {
-    'New York': 3500,
-    'San Francisco': 3400,
-    'Los Angeles': 3000,
-    'Chicago': 2600,
-    'Miami': 2500,
-    'Dallas': 2400,
-    'Houston': 2300,
-    'Atlanta': 2200
+    'Mumbai': 85000,
+    'Delhi': 75000,
+    'Bangalore': 70000,
+    'Hyderabad': 60000,
+    'Chennai': 65000,
+    'Kolkata': 50000,
+    'Pune': 72000,
+    'Ahmedabad': 55000
 }
 
 @st.cache_data
@@ -80,7 +80,7 @@ model = RandomForestRegressor(random_state=42)
 model.fit(X, y)
 
 def prepare_features(project_type, location, total_area, floors, basements):
-    base_rate = city_base_rates.get(location, 2500)
+    base_rate = city_base_rates.get(location, 60000)
     base_cost = total_area * base_rate
     material_cost = base_cost * 0.6 * (1 + 0.05 * (floors - 1) + 0.10 * basements)
     labor_cost = base_cost * 0.3 * (1 + 0.05 * (floors - 1) + 0.10 * basements)
@@ -107,7 +107,7 @@ with col2:
 if st.button("Estimate Cost", type="primary"):
     input_data = prepare_features(project_type, location, total_area, number_of_floors, number_of_basements)
     predicted_cost = model.predict(input_data)[0]
-    st.success(f"Predicted Total Construction Cost: ${predicted_cost:,.0f}")
+    st.success(f"Predicted Total Construction Cost: ₹{predicted_cost:,.0f}")
     st.session_state['base_project'] = {
         'project_type': project_type,
         'location': location,
@@ -145,12 +145,12 @@ if st.button("Simulate"):
             updated_basements += num
         input_data = prepare_features(base['project_type'], base['location'], updated_area, updated_floors, updated_basements)
         new_predicted_cost = model.predict(input_data)[0]
-        st.success(f"Updated Estimated Cost: ${new_predicted_cost:,.0f}")
+        st.success(f"Updated Estimated Cost: ₹{new_predicted_cost:,.0f}")
         if ai_enabled:
-            prompt = f"Base area {base['total_area']} m², floors {base['number_of_floors']}, basements {base['number_of_basements']}, cost ${base['predicted_cost']:,.0f}. Change: {what_if_change}. After: area {updated_area:.2f}, floors {updated_floors}, basements {updated_basements}, cost ${new_predicted_cost:,.0f}. Explain briefly why cost changed and give advice."
+            prompt = f"Base area {base['total_area']} m², floors {base['number_of_floors']}, basements {base['number_of_basements']}, cost ₹{base['predicted_cost']:,.0f}. Change: {what_if_change}. After: area {updated_area:.2f}, floors {updated_floors}, basements {updated_basements}, cost ₹{new_predicted_cost:,.0f}. Explain briefly why cost changed and give advice for Indian construction market."
             response = conversation.run(prompt)
             st.markdown(f"**Explanation:**\n\n{response}")
         else:
             delta = new_predicted_cost - base['predicted_cost']
             pct = (delta / base['predicted_cost']) * 100
-            st.info(f"Cost change: ${delta:,.0f} ({pct:+.1f}%). Enable AI for narrative explanation.")
+            st.info(f"Cost change: ₹{delta:,.0f} ({pct:+.1f}%). Enable AI for narrative explanation.")

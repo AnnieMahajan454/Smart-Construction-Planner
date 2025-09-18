@@ -30,8 +30,8 @@ if geospatial_available:
     # Place selection
     st.header("📍 Location Selection")
     place = st.text_input(
-        "Enter a place name (e.g., 'San Francisco, CA', 'Manhattan, New York')",
-        value="San Francisco, CA")
+        "Enter a place name (e.g., 'Mumbai, India', 'Bangalore, India')",
+        value="Mumbai, India")
 
     if st.button("Load Location Data"):
         try:
@@ -117,11 +117,11 @@ if geospatial_available:
 
     # Sample points for H3 analysis
     if st.button("Generate Sample Points"):
-        # Create some sample points around San Francisco
+        # Create some sample points around Mumbai
         np.random.seed(42)
         n_points = 50
-        lats = np.random.normal(37.7749, 0.1, n_points)
-        lons = np.random.normal(-122.4194, 0.1, n_points)
+        lats = np.random.normal(19.0760, 0.1, n_points)  # Mumbai coordinates
+        lons = np.random.normal(72.8777, 0.1, n_points)
         counts = np.random.poisson(10, n_points)
 
         sample_points = pd.DataFrame({

@@ -120,7 +120,7 @@ def validate_inputs(**kwargs) -> Dict[str, Any]:
     }
 
 
-def format_currency(amount: float, currency: str = "USD") -> str:
+def format_currency(amount: float, currency: str = "INR") -> str:
     """Format currency amounts consistently."""
 
     if currency == "USD":
@@ -130,6 +130,15 @@ def format_currency(amount: float, currency: str = "USD") -> str:
             return f"${amount/1_000:.0f}K"
         else:
             return f"${amount:,.0f}"
+    elif currency == "INR":
+        if amount >= 10_000_000:  # 1 crore
+            return f"₹{amount/10_000_000:.1f}Cr"
+        elif amount >= 100_000:  # 1 lakh
+            return f"₹{amount/100_000:.1f}L"
+        elif amount >= 1_000:
+            return f"₹{amount/1_000:.0f}K"
+        else:
+            return f"₹{amount:,.0f}"
 
     return f"{amount:,.2f} {currency}"
 
@@ -243,7 +252,7 @@ def display_dataframe_with_styling(df, title: str = None, height: int = 400):
 # Constants for the application
 DEFAULT_MATERIALS = ['steel', 'concrete', 'lumber']
 SUPPORTED_LOCATIONS = [
-    'New York', 'San Francisco', 'Los Angeles', 'Chicago',
-    'Miami', 'Dallas', 'Houston', 'Atlanta'
+    'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad',
+    'Chennai', 'Kolkata', 'Pune', 'Ahmedabad'
 ]
 PROJECT_TYPES = ['Residential', 'Commercial', 'Industrial', 'Institutional']
