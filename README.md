@@ -2,7 +2,7 @@
 
 An intelligent construction planning application powered by AI/ML for optimal project management across major Indian cities.
 
-## 🌟 Features
+## Features
 
 ### 🎯 **Smart Planning**
 - **AI-Powered Predictions**: Advanced ML algorithms for project timeline optimization
@@ -22,7 +22,7 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 - **Traffic Management**: Peak hour avoidance strategies
 - **Cost Optimization**: Budget planning with city-specific factors
 
-## 🏙️ Supported Cities
+## Supported Cities
 
 - **Mumbai** - Maharashtra (High traffic, monsoon-prone)
 - **Delhi** - Delhi NCR (High traffic, moderate weather risk)
@@ -33,7 +33,7 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 - **Pune** - Maharashtra (IT hub, moderate traffic)
 - **Ahmedabad** - Gujarat (Industrial, low weather risk)
 
-## 🏗️ Project Types
+## Project Types
 
 | Project Type | Duration | Complexity | Icon |
 |--------------|----------|------------|------|
@@ -44,11 +44,7 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 | Metro/Railway | 600 days | 95% | 🚇 |
 | Industrial Complex | 450 days | 85% | 🏭 |
 
-## 🚀 Live Demo
-
-**🌐 [Try the Live App](https://your-app-url.streamlit.app)**
-
-## 💻 Local Installation
+## Local Installation
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -74,7 +70,7 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 4. **Access the app**
    - Open your browser and navigate to `http://localhost:8501`
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Frontend**: Streamlit (Python web framework)
 - **Data Processing**: Pandas, NumPy  
@@ -83,7 +79,7 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 - **Maps**: Folium + Streamlit-Folium
 - **Styling**: Custom CSS for professional UI/UX
 
-## 📱 User Interface
+## User Interface
 
 ### 🎨 **Modern Design**
 - **Light Theme**: Professional, clean interface optimized for all browsers
@@ -118,7 +114,7 @@ An intelligent construction planning application powered by AI/ML for optimal pr
   - Seasonal factors (20% weight)
   - City-specific risks (10% weight)
 
-## 📊 Sample Analytics
+## Sample Analytics
 
 ### **Project Metrics**
 - **Total Duration**: Base + Weather Delays + Traffic Impact
@@ -131,7 +127,7 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 - ⚠️ Good conditions with challenges (60-80%)
 - 🚨 Difficult conditions - extra planning needed (<60%)
 
-## 🌍 Deployment
+## Deployment
 
 ### **Streamlit Cloud (Recommended)**
 1. Push your code to GitHub
@@ -144,17 +140,13 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 - Google Cloud Run
 - AWS EC2
 
-## 👩‍💻 Developer
+## Developer
 
 **Annie Mahajan**
 - GitHub: [@AnnieMahajan454](https://github.com/AnnieMahajan454)
 - Project: [Smart Construction Planner](https://github.com/AnnieMahajan454/Smart-Construction-Planner)
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -162,7 +154,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 🔄 Changelog
+## Changelog
 
 ### Version 1.0.0 (Current)
 - ✅ AI-powered construction planning
@@ -174,4 +166,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**🏗️ Built with ❤️ for the Indian Construction Industry**
+**🏗️ Built for the Indian Construction Industry**
