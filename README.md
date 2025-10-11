@@ -4,7 +4,7 @@ An intelligent dual-purpose application powered by AI/ML for:
 - **Construction Planning**: Optimal project management across major Indian cities
 - **Pedestrian Navigation**: Real-time blocked paths & construction site awareness for safe pedestrian movement
 
-## 🌟 Features
+## Features
 
 ### 🏗️ **Construction Planning**
 - **AI-Powered Predictions**: Advanced ML algorithms for project timeline optimization
@@ -41,7 +41,7 @@ An intelligent dual-purpose application powered by AI/ML for:
 - **Pune** - Maharashtra (IT hub, moderate traffic)
 - **Ahmedabad** - Gujarat (Industrial, low weather risk)
 
-## 🏗️ Project Types
+## Project Types
 
 | Project Type | Duration | Complexity | Icon |
 |--------------|----------|------------|------|
@@ -52,11 +52,7 @@ An intelligent dual-purpose application powered by AI/ML for:
 | Metro/Railway | 600 days | 95% | 🚇 |
 | Industrial Complex | 450 days | 85% | 🏭 |
 
-## 🚀 Live Demo
-
-**🌐 [Try the Live App](https://your-app-url.streamlit.app)**
-
-## 🚶‍♀️ New! Pedestrian Features
+## Pedestrian Features
 
 The application now includes comprehensive pedestrian navigation features:
 
@@ -74,7 +70,7 @@ The application now includes comprehensive pedestrian navigation features:
 
 📖 **[Full Pedestrian Features Guide](PEDESTRIAN_FEATURES.md)**
 
-## 💻 Local Installation
+## Local Installation
 
 ### Prerequisites
 - Python 3.8 or higher
@@ -109,21 +105,21 @@ The application now includes comprehensive pedestrian navigation features:
 - **Maps**: Folium + Streamlit-Folium
 - **Styling**: Custom CSS for professional UI/UX
 
-## 📱 User Interface
+## User Interface
 
-### 🎨 **Modern Design**
+### **Modern Design**
 - **Light Theme**: Professional, clean interface optimized for all browsers
 - **Responsive Layout**: Works seamlessly on desktop and mobile
 - **Interactive Elements**: Hover effects, smooth transitions
 - **Visual Hierarchy**: Clear information architecture
 
-### 🖥️ **Key Sections**
+### **Key Sections**
 - **Sidebar Controls**: Project configuration and city selection
 - **Main Dashboard**: Real-time metrics and overview
 - **Interactive Tabs**: Timeline, Conditions, Recommendations, Analysis
 - **Visual Charts**: Plotly-powered graphs and Folium maps
 
-## 🤖 AI/ML Features
+## AI/ML Features
 
 ### **Weather Prediction Model**
 - Seasonal pattern analysis
@@ -144,7 +140,7 @@ The application now includes comprehensive pedestrian navigation features:
   - Seasonal factors (20% weight)
   - City-specific risks (10% weight)
 
-## 📊 Sample Analytics
+## Sample Analytics
 
 ### **Project Metrics**
 - **Total Duration**: Base + Weather Delays + Traffic Impact
@@ -170,17 +166,14 @@ The application now includes comprehensive pedestrian navigation features:
 - Google Cloud Run
 - AWS EC2
 
-## 👩‍💻 Developer
+## Developer
 
 **Annie Mahajan**
 - GitHub: [@AnnieMahajan454](https://github.com/AnnieMahajan454)
 - Project: [Smart Construction Planner](https://github.com/AnnieMahajan454/Smart-Construction-Planner)
 
-## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -200,4 +193,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**🏗️ Built with ❤️ for the Indian Construction Industry**
+**Built for the Indian Construction Industry**
