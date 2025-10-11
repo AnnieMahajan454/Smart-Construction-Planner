@@ -2,7 +2,7 @@
 
 The Smart Construction & Pedestrian Planner now includes comprehensive pedestrian navigation features to help people safely navigate around construction sites and blocked paths in major Indian cities.
 
-## 🌟 Features Overview
+## Features Overview
 
 ### 🚫 Blocked Path Detection
 - **Real-time identification** of construction-blocked walkways and pedestrian paths
@@ -34,7 +34,7 @@ The Smart Construction & Pedestrian Planner now includes comprehensive pedestria
 - **Walkway impact status** (No Impact, Temporary Closure, Permanent Reroute)
 - **Working hours** and safety measures in place
 
-## 🚀 How to Use
+## How to Use
 
 ### 1. Launch the Application
 ```bash
@@ -43,7 +43,7 @@ streamlit run ai_planner_light.py
 ```
 
 ### 2. Switch to Pedestrian Mode
-- In the sidebar, select **"🚶‍♀️ Pedestrian View"** from the User Mode radio button
+- In the sidebar, select **"Pedestrian View"** from the User Mode radio button
 - Choose your city from the dropdown menu
 
 ### 3. View Quick Stats
@@ -56,7 +56,7 @@ The sidebar automatically shows:
 ### 4. Explore Available Actions
 
 #### 🗺️ View Pedestrian Map
-- Click **"🗺️ View Pedestrian Map"** to see an interactive map
+- Click **"View Pedestrian Map"** to see an interactive map
 - **Red lines/markers**: High-impact blocked paths or dangerous construction sites
 - **Orange lines/markers**: Medium-impact areas requiring caution
 - **Yellow lines/markers**: Low-impact areas with minor delays
@@ -64,7 +64,7 @@ The sidebar automatically shows:
 - Click on any marker or line for detailed information
 
 #### 🚫 Check Blocked Paths
-- Click **"🚫 Check Blocked Paths"** to see a detailed list
+- Click **"Check Blocked Paths"** to see a detailed list
 - Each blocked path shows:
   - Location and area affected
   - Reason for blockage
@@ -74,7 +74,7 @@ The sidebar automatically shows:
   - Availability of alternatives
 
 #### 🛐️ Find Alternative Routes
-- Click **"🛐️ Find Alternative Routes"** for route suggestions
+- Click **"Find Alternative Routes"** for route suggestions
 - View alternative routes for high-priority blocked paths
 - Each alternative includes:
   - Route description and difficulty level
@@ -99,7 +99,7 @@ The sidebar automatically shows:
 - **Partial Block**: Path is partially accessible with restrictions
 - **Detour Available**: Main path blocked but official detour provided
 
-## 🏙️ Supported Cities
+## Supported Cities
 
 The pedestrian features are available for all 8 major Indian cities:
 - **Mumbai** - Maharashtra (High traffic, monsoon-prone)
@@ -113,25 +113,25 @@ The pedestrian features are available for all 8 major Indian cities:
 
 ## 💡 Tips for Pedestrians
 
-### 🚨 Safety First
+### Safety First
 - Always check high-priority alerts before traveling
 - Pay attention to construction site working hours (typically 7 AM - 7 PM)
 - Use recommended alternative routes when main paths are blocked
 - Stay updated with real-time information before starting your journey
 
-### 🕐 Plan Ahead
+### Plan Ahead
 - Add extra time to your journey based on delay estimates
 - Check the map to identify all affected areas along your route
 - Consider alternative routes that might be safer or faster
 - Be prepared for temporary closures that might change daily
 
-### 🗺️ Using the Map Effectively
+### Using the Map Effectively
 - Zoom in for detailed street-level information
 - Click on markers to get comprehensive construction details
 - Use the legend to understand different color codes
 - Plan your entire route considering multiple potential blocks
 
-## 🔧 Technical Features
+## Technical Features
 
 ### Data Structure
 - **Real-time updates**: Construction status and blocked paths
@@ -145,7 +145,7 @@ The pedestrian features are available for all 8 major Indian cities:
 - **Real-time coordination**: Better planning reduces pedestrian disruption
 - **Data-driven decisions**: Analytics help improve urban planning
 
-## 🆘 Support
+## Support
 
 If you encounter any issues or need help:
 1. Check the demo script: `python demo_pedestrian_features.py`
@@ -153,7 +153,7 @@ If you encounter any issues or need help:
 3. Ensure all dependencies are installed: `pip install -r requirements.txt`
 4. Report issues through the project's GitHub repository
 
-## 🔮 Future Enhancements
+## Future Enhancements
 
 Coming features may include:
 - **Real-time GPS integration** for live location tracking
@@ -164,4 +164,4 @@ Coming features may include:
 
 ---
 
-**🏗️🚶‍♀️ Making Indian cities safer and more navigable for everyone!**
+**Making Indian cities safer and more navigable for everyone!**
