@@ -1,14 +1,22 @@
-# 🏗️ AI Smart Construction Planner - India
+# 🏗️🚶‍♀️ Smart Construction & Pedestrian Planner - India
 
-An intelligent construction planning application powered by AI/ML for optimal project management across major Indian cities.
+An intelligent dual-purpose application powered by AI/ML for:
+- **Construction Planning**: Optimal project management across major Indian cities
+- **Pedestrian Navigation**: Real-time blocked paths & construction site awareness for safe pedestrian movement
 
 ## 🌟 Features
 
-### 🎯 **Smart Planning**
+### 🏗️ **Construction Planning**
 - **AI-Powered Predictions**: Advanced ML algorithms for project timeline optimization
 - **Weather Impact Analysis**: Real-time weather data integration with construction delays
 - **Traffic Optimization**: Traffic pattern analysis for material delivery planning
 - **Timeline Planning**: Automated project phase scheduling
+
+### 🚶‍♀️ **Pedestrian Navigation**
+- **Blocked Path Detection**: Real-time identification of construction-blocked walkways
+- **Alternative Route Suggestions**: AI-powered alternative pedestrian route recommendations
+- **Safety Alerts**: Live notifications about construction hazards and pedestrian risks
+- **Interactive Maps**: Visual representation of blocked paths, construction sites, and safe routes
 
 ### 📊 **Real-time Intelligence**
 - **Live Weather Conditions**: Current weather data for 8 major Indian cities
@@ -47,6 +55,24 @@ An intelligent construction planning application powered by AI/ML for optimal pr
 ## 🚀 Live Demo
 
 **🌐 [Try the Live App](https://your-app-url.streamlit.app)**
+
+## 🚶‍♀️ New! Pedestrian Features
+
+The application now includes comprehensive pedestrian navigation features:
+
+- **🗺️ Interactive Pedestrian Map**: Visual representation of blocked paths and construction sites
+- **🚫 Blocked Path Detection**: Real-time identification of construction-blocked walkways
+- **🛐️ Alternative Routes**: AI-powered suggestions for safe pedestrian navigation
+- **⚠️ Safety Alerts**: Priority-based notifications about construction hazards
+- **📊 Area Impact Analysis**: Statistics showing pedestrian impact by neighborhood
+
+### Quick Start for Pedestrians
+1. Launch the app and select "🚶‍♀️ Pedestrian View" from the sidebar
+2. Choose your city to see blocked paths and construction sites
+3. Use the interactive map to plan safe walking routes
+4. Check alternative route suggestions for blocked paths
+
+📖 **[Full Pedestrian Features Guide](PEDESTRIAN_FEATURES.md)**
 
 ## 💻 Local Installation
 
