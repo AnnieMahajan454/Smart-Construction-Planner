@@ -1,4 +1,4 @@
-# 🏗️🚶‍♀️ Smart Construction & Pedestrian Planner - India
+# Smart Construction & Pedestrian Planner - India
 
 An intelligent dual-purpose application powered by AI/ML for:
 - **Construction Planning**: Optimal project management across major Indian cities
