@@ -10,9 +10,12 @@ from sklearn.ensemble import RandomForestRegressor
 import random
 import time
 
+# Import pedestrian paths manager
+from pedestrian_paths import PedestrianPathsManager
+
 # Page configuration
 st.set_page_config(
-    page_title="🏗️ AI Construction Planner - India",
+    page_title="Smart Construction & Pedestrian Planner - India",
     page_icon="🏗️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -823,12 +826,16 @@ def create_simple_map(cities, selected_city):
 def get_planner():
     return AIConstructionPlannerLight()
 
+@st.cache_resource
+def get_pedestrian_manager():
+    return PedestrianPathsManager()
+
 def main():
     # Header
     st.markdown("""
     <div class="header-box">
-        <h1>🏗️ AI Smart Construction Planner - India</h1>
-        <p>Intelligent planning with real-time weather & traffic analysis</p>
+        <h1>Smart Construction & Pedestrian Planner</h1>
+        <p>AI-powered construction planning & real-time pedestrian navigation for Indian cities</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -841,44 +848,303 @@ def main():
     
     # Sidebar
     with st.sidebar:
-        st.header("🎯 Project Details")
-        
-        selected_city = st.selectbox(
-            "📍 City",
-            options=list(planner.cities.keys())
-        )
-        
-        project_type = st.selectbox(
-            "🏗️ Project Type",
-            options=list(planner.project_types.keys()),
-            format_func=lambda x: f"{planner.project_types[x]['icon']} {x}"
-        )
-        
-        project_size = st.selectbox(
-            "📏 Size",
-            options=['Small', 'Medium', 'Large', 'Mega'],
-            index=1
-        )
-        
-        project_name = st.text_input(
-            "📝 Project Name",
-            value=f"{project_type} - {selected_city}"
-        )
-        
-        start_date = st.date_input(
-            "📅 Start Date",
-            value=datetime.now().date()
+        # Mode selection
+        st.header("User Mode")
+        user_mode = st.radio(
+            "Select your view:",
+            ["Construction Planner", "Pedestrian Navigation"],
+            index=0
         )
         
         st.markdown("---")
         
+        if user_mode == "Construction Planner":
+            st.header("Project Configuration")
+        else:
+            st.header("Navigation Settings")
+        
+        selected_city = st.selectbox(
+            "Select City",
+            options=list(planner.cities.keys())
+        )
+        
+        if user_mode == "Construction Planner":
+            project_type = st.selectbox(
+                "Project Type",
+                options=list(planner.project_types.keys()),
+                format_func=lambda x: f"{planner.project_types[x]['icon']} {x}"
+            )
+            
+            project_size = st.selectbox(
+                "Project Size",
+                options=['Small', 'Medium', 'Large', 'Mega'],
+                index=1
+            )
+            
+            project_name = st.text_input(
+                "Project Name",
+                value=f"{project_type} - {selected_city}"
+            )
+            
+            start_date = st.date_input(
+                "Start Date",
+                value=datetime.now().date()
+            )
+        else:
+            # Set default values for pedestrian mode
+            project_type = 'Residential Building'
+            project_size = 'Medium'
+            project_name = f"Default Project - {selected_city}"
+            start_date = datetime.now().date()
+            # Pedestrian-specific options
+            pedestrian_manager = get_pedestrian_manager()
+            
+            st.subheader("Status Overview")
+            impact = pedestrian_manager.get_pedestrian_impact_summary(selected_city)
+            
+            # Create a more professional info display
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Blocked Paths", impact['total_blocked_paths'])
+                st.metric("High Impact", impact['high_impact_paths'])
+            with col2:
+                st.metric("Construction Sites", impact['total_construction_sites'])
+                st.metric("Avg Delay (min)", f"{impact['average_delay_minutes']:.1f}")
+            
+            view_filter = st.selectbox(
+                "Filter View",
+                options=['All Issues', 'Blocked Paths Only', 'Construction Sites Only', 'High Priority Only'],
+                index=0
+            )
+        
+        st.markdown("---")
+        
         # Action buttons
-        generate_plan = st.button("🤖 Generate AI Plan", type="primary")
-        check_conditions = st.button("🌤️ Check Conditions")
-        find_timing = st.button("⏰ Find Best Timing")
+        if user_mode == "Construction Planner":
+            generate_plan = st.button("Generate AI Plan", type="primary")
+            check_conditions = st.button("Check Current Conditions")
+            find_timing = st.button("Find Optimal Timing")
+            
+            # Set pedestrian buttons to False
+            view_pedestrian_map = False
+            check_blocked_paths = False
+            find_alternatives = False
+        else:
+            view_pedestrian_map = st.button("View Navigation Map", type="primary")
+            check_blocked_paths = st.button("Check Blocked Paths")
+            find_alternatives = st.button("Find Alternative Routes")
+            
+            # Set construction planner buttons to False
+            generate_plan = False
+            check_conditions = False
+            find_timing = False
     
     # Main content
-    if generate_plan:
+    if view_pedestrian_map:
+        pedestrian_manager = get_pedestrian_manager()
+        st.header(f"Navigation Map - {selected_city}")
+        
+        with st.spinner("Loading navigation map with blocked paths and construction sites..."):
+            pedestrian_map = pedestrian_manager.create_pedestrian_map(selected_city)
+            
+            if pedestrian_map:
+                st_folium(pedestrian_map, width=700, height=500)
+            else:
+                st.error("Could not load map for this city. Please try again.")
+        
+        # Show summary stats
+        col1, col2 = st.columns(2)
+        
+        impact = pedestrian_manager.get_pedestrian_impact_summary(selected_city)
+        
+        with col1:
+            st.markdown(f"""
+            <div class="info-box">
+                <h4>Pedestrian Impact Summary</h4>
+                <p><strong>Total Blocked Paths:</strong> {impact['total_blocked_paths']}</p>
+                <p><strong>High Impact Blocks:</strong> {impact['high_impact_paths']}</p>
+                <p><strong>Complete Path Closures:</strong> {impact['complete_blocks']}</p>
+                <p><strong>Average Delay:</strong> {impact['average_delay_minutes']} minutes</p>
+                <p><strong>Areas Affected:</strong> {impact['areas_affected']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col2:
+            st.markdown(f"""
+            <div class="info-box">
+                <h4>Construction Impact</h4>
+                <p><strong>Total Construction Sites:</strong> {impact['total_construction_sites']}</p>
+                <p><strong>High Risk Sites:</strong> {impact['dangerous_construction_sites']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # Safety alerts
+        st.subheader("Current Safety Alerts")
+        alerts = pedestrian_manager.get_safety_alerts(selected_city)
+        
+        if alerts:
+            for alert in alerts:
+                priority_color = {
+                    'High': '#ffebee',
+                    'Medium': '#fff3e0', 
+                    'Low': '#e8f5e8'
+                }.get(alert['priority'], '#f5f5f5')
+                
+                priority_icon = {
+                    'High': '🔴',
+                    'Medium': '🟡',
+                    'Low': '🟢'
+                }.get(alert['priority'], '⚪')
+                
+                st.markdown(f"""
+                <div style="background-color: {priority_color}; padding: 1rem; border-radius: 8px; margin: 0.5rem 0; border-left: 4px solid {'#f44336' if alert['priority'] == 'High' else '#ff9800' if alert['priority'] == 'Medium' else '#4caf50'};">
+                    <strong>{priority_icon} {alert['type']} - {alert['priority']} Priority</strong><br>
+                    <strong>Location:</strong> {alert['area']}<br>
+                    <strong>Details:</strong> {alert['message']}<br>
+                    <strong>Expected Duration:</strong> {alert['expected_duration']} more days
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            st.success("No current safety alerts for this city")
+    
+    elif check_blocked_paths:
+        pedestrian_manager = get_pedestrian_manager()
+        st.header(f"Blocked Paths - {selected_city}")
+        
+        blocked_paths = pedestrian_manager.get_blocked_paths_for_city(selected_city)
+        
+        if blocked_paths:
+            for path in blocked_paths:
+                # Color based on severity
+                severity_color = {
+                    'High': '#ffcdd2',
+                    'Medium': '#ffe0b2',
+                    'Low': '#c8e6c9'
+                }.get(path['severity'], '#f5f5f5')
+                
+                # Add severity indicator
+                severity_indicator = {
+                    'High': '🔴',
+                    'Medium': '🟡',
+                    'Low': '🟢'
+                }.get(path['severity'], '⚪')
+                
+                st.markdown(f"""
+                <div class="info-box" style="background-color: {severity_color};">
+                    <h4>{severity_indicator} {path['name']}</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <p><strong>Location:</strong> {path['area']}</p>
+                            <p><strong>Reason:</strong> {path['block_reason']}</p>
+                            <p><strong>Impact:</strong> {path['pedestrian_impact']}</p>
+                            <p><strong>Severity:</strong> {path['severity']}</p>
+                        </div>
+                        <div>
+                            <p><strong>Expected End:</strong> {path['expected_end'].strftime('%Y-%m-%d')}</p>
+                            <p><strong>Estimated Delay:</strong> {path['estimated_delay']} minutes</p>
+                            <p><strong>Alternative Route:</strong> {'Available' if path['alternative_available'] else 'Not Available'}</p>
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if path['alternative_available']:
+                    if st.button(f"Show Alternative Routes", key=f"alt_{path['id']}"):
+                        alternatives = pedestrian_manager.find_alternative_routes(selected_city, path['id'])
+                        st.subheader(f"Alternative Routes for {path['name']}")
+                        
+                        for i, alt in enumerate(alternatives, 1):
+                            difficulty_color = {
+                                'Easy': '#e8f5e8',
+                                'Moderate': '#fff3e0',
+                                'Difficult': '#ffebee'
+                            }.get(alt['difficulty'], '#f5f5f5')
+                            
+                            st.markdown(f"""
+                            <div class="recommendation-box" style="background-color: {difficulty_color};">
+                                <strong>Route {i}: {alt['name']}</strong><br>
+                                <strong>Description:</strong> {alt['description']}<br>
+                                <strong>Additional Distance:</strong> {alt['additional_distance']}m<br>
+                                <strong>Additional Time:</strong> {alt['additional_time']} minutes<br>
+                                <strong>Difficulty:</strong> {alt['difficulty']}<br>
+                                <strong>Safety Rating:</strong> {alt['safety_rating']}
+                            </div>
+                            """, unsafe_allow_html=True)
+        else:
+            st.success("No blocked paths currently reported in this city")
+    
+    elif find_alternatives:
+        pedestrian_manager = get_pedestrian_manager()
+        st.header(f"Alternative Routes - {selected_city}")
+        
+        blocked_paths = pedestrian_manager.get_blocked_paths_for_city(selected_city)
+        high_impact_paths = [p for p in blocked_paths if p['severity'] == 'High' or p['pedestrian_impact'] == 'Complete Block']
+        
+        if high_impact_paths:
+            st.subheader("High Priority Blocked Paths - Alternative Routes Available")
+            
+            for path in high_impact_paths:
+                if path['alternative_available']:
+                    st.markdown(f"""
+                    <div class="phase-box">
+                        <h5>Blocked: {path['name']}</h5>
+                        <p><strong>Reason:</strong> {path['block_reason']}</p>
+                        <p><strong>Expected End:</strong> {path['expected_end'].strftime('%Y-%m-%d')}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    alternatives = pedestrian_manager.find_alternative_routes(selected_city, path['id'])
+                    
+                    col1, col2, col3 = st.columns(3)
+                    for i, alt in enumerate(alternatives):
+                        col = [col1, col2, col3][i % 3]
+                        
+                        difficulty_color = {
+                            'Easy': '#c8e6c9',
+                            'Moderate': '#ffe0b2',
+                            'Difficult': '#ffcdd2'
+                        }.get(alt['difficulty'], '#f5f5f5')
+                        
+                        with col:
+                            st.markdown(f"""
+                            <div class="info-box" style="background-color: {difficulty_color};">
+                                <h4>Route {i}: {alt['name']}</h4>
+                                <p><strong>Description:</strong> {alt['description']}</p>
+                                <p><strong>Extra Distance:</strong> +{alt['additional_distance']}m</p>
+                                <p><strong>Extra Time:</strong> +{alt['additional_time']} min</p>
+                                <p><strong>Difficulty:</strong> {alt['difficulty']}</p>
+                                <p><strong>Safety Rating:</strong> {alt['safety_rating']}</p>
+                            </div>
+                            """, unsafe_allow_html=True)
+                    
+                    st.markdown("---")
+        else:
+            st.success("No high priority blocked paths requiring alternatives")
+        
+        # Area-wise impact
+        st.subheader("Area-wise Pedestrian Impact")
+        area_impact = pedestrian_manager.get_area_wise_impact(selected_city)
+        
+        if area_impact:
+            areas = list(area_impact.keys())
+            blocked_counts = [area_impact[area]['blocked_paths'] for area in areas]
+            construction_counts = [area_impact[area]['construction_sites'] for area in areas]
+            
+            fig = go.Figure()
+            fig.add_trace(go.Bar(name='Blocked Paths', x=areas, y=blocked_counts, marker_color='#ea4335'))
+            fig.add_trace(go.Bar(name='Construction Sites', x=areas, y=construction_counts, marker_color='#fbbc04'))
+            
+            fig.update_layout(
+                title=f"Pedestrian Impact by Area - {selected_city}",
+                xaxis_title="Areas",
+                yaxis_title="Count",
+                barmode='group',
+                height=400
+            )
+            
+            st.plotly_chart(fig, use_container_width=True)
+    
+    elif generate_plan:
         st.header(f"📊 AI Plan: {project_name}")
         
         with st.spinner("🤖 Generating AI-powered construction plan..."):
@@ -1185,46 +1451,130 @@ def main():
     
     else:
         # Default view
-        col1, col2 = st.columns([1, 1])
+        if user_mode == "🚶‍♀️ Pedestrian View":
+            # Pedestrian default view
+            pedestrian_manager = get_pedestrian_manager()
+            
+            st.header(f"🚶‍♀️ Pedestrian Navigation - {selected_city}")
+            
+            # Quick overview cards
+            impact = pedestrian_manager.get_pedestrian_impact_summary(selected_city)
+            
+            col1, col2, col3, col4 = st.columns(4)
+            
+            with col1:
+                st.markdown(f"""
+                <div class="metric-box">
+                    <h3 style="color: #ea4335;">{impact['total_blocked_paths']}</h3>
+                    <p>Blocked Paths</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                st.markdown(f"""
+                <div class="metric-box">
+                    <h3 style="color: #fbbc04;">{impact['total_construction_sites']}</h3>
+                    <p>Construction Sites</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col3:
+                st.markdown(f"""
+                <div class="metric-box">
+                    <h3 style="color: #ea4335;">{impact['high_impact_paths']}</h3>
+                    <p>High Impact</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col4:
+                st.markdown(f"""
+                <div class="metric-box">
+                    <h3 style="color: #34a853;">{impact['average_delay_minutes']}</h3>
+                    <p>Avg Delay (min)</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            # Recent alerts
+            st.subheader("Recent Safety Alerts")
+            alerts = pedestrian_manager.get_safety_alerts(selected_city)[:3]  # Show top 3
+            
+            if alerts:
+                for alert in alerts:
+                    priority_icon = "🔴" if alert['priority'] == 'High' else "🟡" if alert['priority'] == 'Medium' else "🟢"
+                    st.markdown(f"""
+                    <div class="recommendation-box">
+                        <strong>{priority_icon} {alert['type']} - {alert['area']}</strong><br>
+                        {alert['message']}<br>
+                        <small>Expected duration: {alert['expected_duration']} more days</small>
+                    </div>
+                    """, unsafe_allow_html=True)
+            else:
+                st.success("No current safety alerts")
+            
+            # Area breakdown
+            st.subheader("Most Affected Areas")
+            area_impact = pedestrian_manager.get_area_wise_impact(selected_city)
+            
+            if area_impact:
+                # Sort areas by total impact
+                sorted_areas = sorted(area_impact.items(), 
+                                    key=lambda x: x[1]['blocked_paths'] + x[1]['construction_sites'], 
+                                    reverse=True)[:5]
+                
+                for area, data in sorted_areas:
+                    total_impact = data['blocked_paths'] + data['construction_sites']
+                    if total_impact > 0:
+                        st.markdown(f"""
+                        <div class="phase-box">
+                            <h5>{area}</h5>
+                            <p><strong>Blocked Paths:</strong> {data['blocked_paths']} | <strong>Construction Sites:</strong> {data['construction_sites']}</p>
+                            <p><strong>Total Delay:</strong> {data['total_delay_minutes']} minutes</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+        else:
+            # Construction planner default view
+            col1, col2 = st.columns([1, 1])
+            
+            with col1:
+                st.subheader(f"{selected_city} City Overview")
+                
+                city_info = planner.cities[selected_city]
+                
+                st.markdown(f"""
+                <div class="info-box">
+                    <h4>City Information</h4>
+                    <p><strong>State:</strong> {city_info['state']}</p>
+                    <p><strong>Population:</strong> {city_info['population']} Million</p>
+                    <p><strong>Traffic Level:</strong> {city_info['traffic_intensity']*100:.0f}%</p>
+                    <p><strong>Weather Risk:</strong> {city_info['weather_risk']}</p>
+                    <p><strong>Cost Index:</strong> {city_info['cost_index']}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+                # Project info (only if in construction planner mode)
+                project_info = planner.project_types[project_type]
+                
+                st.markdown(f"""
+                <div class="info-box">
+                    <h4>{project_info['icon']} Project Details</h4>
+                    <p><strong>Type:</strong> {project_type}</p>
+                    <p><strong>Base Duration:</strong> {project_info['duration']} days</p>
+                    <p><strong>Complexity:</strong> {project_info['complexity']*100:.0f}%</p>
+                    <p><strong>Size:</strong> {project_size}</p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                st.subheader("City Map")
+                
+                india_map = create_simple_map(planner.cities, selected_city)
+                if india_map:
+                    map_data = st_folium(india_map, width=400, height=300)
+                else:
+                    st.info("Map not available for this city")
         
-        with col1:
-            st.subheader(f"📍 {selected_city} Overview")
-            
-            city_info = planner.cities[selected_city]
-            
-            st.markdown(f"""
-            <div class="info-box">
-                <h4>🏙️ City Information</h4>
-                <p><strong>State:</strong> {city_info['state']}</p>
-                <p><strong>Population:</strong> {city_info['population']} Million</p>
-                <p><strong>Traffic Level:</strong> {city_info['traffic_intensity']*100:.0f}%</p>
-                <p><strong>Weather Risk:</strong> {city_info['weather_risk']}</p>
-                <p><strong>Cost Index:</strong> {city_info['cost_index']}</p>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            # Project info
-            project_info = planner.project_types[project_type]
-            
-            st.markdown(f"""
-            <div class="info-box">
-                <h4>{project_info['icon']} Project Details</h4>
-                <p><strong>Type:</strong> {project_type}</p>
-                <p><strong>Base Duration:</strong> {project_info['duration']} days</p>
-                <p><strong>Complexity:</strong> {project_info['complexity']*100:.0f}%</p>
-                <p><strong>Size:</strong> {project_size}</p>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col2:
-            st.subheader("🗺️ India Map")
-            
-            india_map = create_simple_map(planner.cities, selected_city)
-            if india_map:
-                map_data = st_folium(india_map, width=400, height=300)
-        
-        # Quick stats
-        st.subheader("📊 Platform Features")
+        # Quick stats - Fixed to be properly aligned
+        st.subheader("Platform Statistics")
         
         col1, col2, col3, col4 = st.columns(4)
         
@@ -1260,56 +1610,102 @@ def main():
             </div>
             """, unsafe_allow_html=True)
         
-        # Features
-        st.subheader("✨ Key Features")
-        
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            st.markdown("""
-            <div class="info-box">
-                <h4>🧠 Smart Planning</h4>
-                <ul>
-                    <li>AI-powered predictions</li>
-                    <li>Weather impact analysis</li>
-                    <li>Traffic optimization</li>
-                    <li>Timeline planning</li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col2:
-            st.markdown("""
-            <div class="info-box">
-                <h4>📊 Real-time Data</h4>
-                <ul>
-                    <li>Live weather conditions</li>
-                    <li>Traffic patterns</li>
-                    <li>Cost estimation</li>
-                    <li>Risk assessment</li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col3:
-            st.markdown("""
-            <div class="info-box">
-                <h4>🎯 Smart Insights</h4>
-                <ul>
-                    <li>Optimal timing</li>
-                    <li>Weather precautions</li>
-                    <li>Traffic management</li>
-                    <li>Cost optimization</li>
-                </ul>
-            </div>
-            """, unsafe_allow_html=True)
+        # Features (only show for construction planner mode) - Fixed alignment
+        if user_mode == "Construction Planner":
+            st.subheader("Key Features")
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.markdown("""
+                <div class="info-box" style="height: 200px;">
+                    <h4>Smart Planning</h4>
+                    <ul>
+                        <li>AI-powered predictions</li>
+                        <li>Weather impact analysis</li>
+                        <li>Traffic optimization</li>
+                        <li>Timeline planning</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                st.markdown("""
+                <div class="info-box" style="height: 200px;">
+                    <h4>Real-time Data</h4>
+                    <ul>
+                        <li>Live weather conditions</li>
+                        <li>Traffic patterns</li>
+                        <li>Cost estimation</li>
+                        <li>Risk assessment</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col3:
+                st.markdown("""
+                <div class="info-box" style="height: 200px;">
+                    <h4>Smart Insights</h4>
+                    <ul>
+                        <li>Optimal timing</li>
+                        <li>Weather precautions</li>
+                        <li>Traffic management</li>
+                        <li>Cost optimization</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            # Pedestrian features
+            st.subheader("Navigation Features")
+            
+            col1, col2, col3 = st.columns(3)
+            
+            with col1:
+                st.markdown("""
+                <div class="info-box" style="height: 200px;">
+                    <h4>Path Monitoring</h4>
+                    <ul>
+                        <li>Real-time blocked paths</li>
+                        <li>Construction site alerts</li>
+                        <li>Safety notifications</li>
+                        <li>Impact assessment</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col2:
+                st.markdown("""
+                <div class="info-box" style="height: 200px;">
+                    <h4>Route Planning</h4>
+                    <ul>
+                        <li>Alternative route suggestions</li>
+                        <li>Difficulty ratings</li>
+                        <li>Safety assessments</li>
+                        <li>Time calculations</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col3:
+                st.markdown("""
+                <div class="info-box" style="height: 200px;">
+                    <h4>Safety Intelligence</h4>
+                    <ul>
+                        <li>Priority-based alerts</li>
+                        <li>Construction hazards</li>
+                        <li>Area impact analysis</li>
+                        <li>Duration estimates</li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
     
     # Footer
     st.markdown("---")
     st.markdown("""
-    <div style="text-align: center; padding: 1rem; color: #666;">
-        <p><strong>🏗️ AI Smart Construction Planner for India</strong></p>
-        <p>Powered by Machine Learning | Real-time Intelligence | Smart Planning</p>
+    <div style="text-align: center; padding: 1.5rem; color: #666; background-color: #f8f9fa; border-radius: 10px; margin-top: 2rem;">
+        <p><strong>Smart Construction & Pedestrian Planner for India</strong></p>
+        <p>Powered by Machine Learning • Real-time Intelligence • Smart Planning & Navigation</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Helping construction professionals plan efficiently and pedestrians navigate safely</p>
     </div>
     """, unsafe_allow_html=True)
 
