@@ -6,31 +6,31 @@ An intelligent dual-purpose application powered by AI/ML for:
 
 ## Features
 
-### 🏗️ **Construction Planning**
+### **Construction Planning**
 - **AI-Powered Predictions**: Advanced ML algorithms for project timeline optimization
 - **Weather Impact Analysis**: Real-time weather data integration with construction delays
 - **Traffic Optimization**: Traffic pattern analysis for material delivery planning
 - **Timeline Planning**: Automated project phase scheduling
 
-### 🚶‍♀️ **Pedestrian Navigation**
+### **Pedestrian Navigation**
 - **Blocked Path Detection**: Real-time identification of construction-blocked walkways
 - **Alternative Route Suggestions**: AI-powered alternative pedestrian route recommendations
 - **Safety Alerts**: Live notifications about construction hazards and pedestrian risks
 - **Interactive Maps**: Visual representation of blocked paths, construction sites, and safe routes
 
-### 📊 **Real-time Intelligence**
+### **Real-time Intelligence**
 - **Live Weather Conditions**: Current weather data for 8 major Indian cities
 - **Traffic Patterns**: 24/7 traffic analysis and peak hour identification  
 - **Cost Estimation**: Dynamic cost calculation based on city index and project complexity
 - **Risk Assessment**: Weather and traffic risk evaluation
 
-### 🎯 **Smart Insights**
+### **Smart Insights**
 - **Optimal Timing**: ML-driven recommendations for best construction periods
 - **Weather Precautions**: Seasonal alerts and monsoon planning
 - **Traffic Management**: Peak hour avoidance strategies
 - **Cost Optimization**: Budget planning with city-specific factors
 
-## 🏙️ Supported Cities
+## Supported Cities
 
 - **Mumbai** - Maharashtra (High traffic, monsoon-prone)
 - **Delhi** - Delhi NCR (High traffic, moderate weather risk)
@@ -56,11 +56,11 @@ An intelligent dual-purpose application powered by AI/ML for:
 
 The application now includes comprehensive pedestrian navigation features:
 
-- **🗺️ Interactive Pedestrian Map**: Visual representation of blocked paths and construction sites
-- **🚫 Blocked Path Detection**: Real-time identification of construction-blocked walkways
-- **🛐️ Alternative Routes**: AI-powered suggestions for safe pedestrian navigation
-- **⚠️ Safety Alerts**: Priority-based notifications about construction hazards
-- **📊 Area Impact Analysis**: Statistics showing pedestrian impact by neighborhood
+- **Interactive Pedestrian Map**: Visual representation of blocked paths and construction sites
+- **Blocked Path Detection**: Real-time identification of construction-blocked walkways
+- **Alternative Routes**: AI-powered suggestions for safe pedestrian navigation
+- **Safety Alerts**: Priority-based notifications about construction hazards
+- **Area Impact Analysis**: Statistics showing pedestrian impact by neighborhood
 
 ### Quick Start for Pedestrians
 1. Launch the app and select "🚶‍♀️ Pedestrian View" from the sidebar
@@ -68,7 +68,7 @@ The application now includes comprehensive pedestrian navigation features:
 3. Use the interactive map to plan safe walking routes
 4. Check alternative route suggestions for blocked paths
 
-📖 **[Full Pedestrian Features Guide](PEDESTRIAN_FEATURES.md)**
+**[Full Pedestrian Features Guide](PEDESTRIAN_FEATURES.md)**
 
 ## Local Installation
 
@@ -149,37 +149,9 @@ The application now includes comprehensive pedestrian navigation features:
 - **Risk Assessment**: Weather + Traffic + Complexity scores
 
 ### **Recommendations Engine**
-- ✅ Excellent conditions (80%+ suitability)
-- ⚠️ Good conditions with challenges (60-80%)
-- 🚨 Difficult conditions - extra planning needed (<60%)
-
-## 🌍 Deployment
-
-### **Streamlit Cloud (Recommended)**
-1. Push your code to GitHub
-2. Connect your repository to Streamlit Cloud
-3. Deploy automatically with zero configuration
-
-### **Other Platforms**
-- Heroku
-- Railway
-- Google Cloud Run
-- AWS EC2
-
-## Developer
-
-**Annie Mahajan**
-- GitHub: [@AnnieMahajan454](https://github.com/AnnieMahajan454)
-- Project: [Smart Construction Planner](https://github.com/AnnieMahajan454/Smart-Construction-Planner)
-
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- Excellent conditions (80%+ suitability)
+- Good conditions with challenges (60-80%)
+- Difficult conditions - extra planning needed (<60%)
 
 ## 🔄 Changelog
 
